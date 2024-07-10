@@ -164,6 +164,105 @@ echo implode(" ", $randomNumbers);
 
 echo"<br>"."<br>"."-----------------------------------------------------------------"."<br>"."<br>";
 
+#Q_14
+function findLowestNonZero($array) {
+    $array = array_diff($array, [0]);
+    if (empty($array)) {
+        return null;
+    }
+    return min($array);
+}
+$array1 = array(2, 0, 10, 12, 6);
+echo findLowestNonZero($array1);
+
+echo"<br>"."<br>"."-----------------------------------------------------------------"."<br>"."<br>";
+
+
+#Q_15
+$array = array(5, 3, 1, 3, 8, 7, 4, 1, 1, 3);
+rsort($array);
+print_r($array);
+
+echo"<br>"."<br>"."-----------------------------------------------------------------"."<br>"."<br>";
+
+#Q_16
+
+function customFloor($number, $precision, $separator) {
+    $factor = pow(10, $precision);
+
+    $flooredNumber = floor($number * $factor) / $factor;
+
+    $flooredString = number_format($flooredNumber, $precision, $separator, '');
+
+    return $flooredString;
+}
+
+echo customFloor(1.155, 2, ".") . "\n";  // 1.15
+echo customFloor(100.25781, 4, ".") . "\n";  // 100.2578
+echo customFloor(-2.9636, 3, ".") . "\n";  // -2.964
+
+echo"<br>"."<br>"."-----------------------------------------------------------------"."<br>"."<br>";
+
+#Q_17
+function mergeUniqueLists($list1, $list2) {
+  // 
+    $array1 = array_map('trim', explode(',', $list1));
+    $array2 = array_map('trim', explode(',', $list2));
+
+    $mergedArray = array_merge($array1, $array2);
+
+    $uniqueArray = array_unique($mergedArray);
+
+    sort($uniqueArray);
+
+    $result = implode(', ', $uniqueArray);
+
+    return $result;
+}
+
+$list1 = "4, 5, 6, 7";
+$list2 = "4, 5, 7, 8";
+
+echo mergeUniqueLists($list1, $list2);
+
+
+echo"<br>"."<br>"."-----------------------------------------------------------------"."<br>"."<br>";
+#Q_18
+function removeDuplicates($input) {
+    $array = array_map('trim', explode(',', $input));
+
+    $uniqueArray = array_unique($array);
+
+    sort($uniqueArray);
+
+    $result = implode(', ', $uniqueArray);
+
+    return $result;
+}
+
+$input = "4, 5, 6, 7, 4, 7, 8";
+echo removeDuplicates($input); 
+
+echo"<br>"."<br>"."-----------------------------------------------------------------"."<br>"."<br>";
+
+#Q_19
+
+function isSubset($array1, $array2) {
+    foreach ($array2 as $element) {
+        if (!in_array($element, $array1)) {
+            return false;
+        }
+    }
+    return true;
+}
+$array1 = array('a', '1', '2', '3', '4');
+$array2 = array('a', '3');
+if (isSubset($array1, $array2)) {
+    echo "array2 is a subset of array1";
+} else {
+    echo "array2 is not a subset of array1";
+}
+
 
 
 
