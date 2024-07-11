@@ -65,7 +65,7 @@
 ?>
 
 #Q_2
-<!-- <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -73,7 +73,7 @@
 </head>
 <body>
     <h2>Basic Calculator</h2>
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+    <form action="php.php" method="post">
         <label for="num1">Number 1:</label>
         <input type="number" id="num1" name="num1" required>
         <br><br>
@@ -90,45 +90,69 @@
         <input type="number" id="num2" name="num2" required>
         <br><br>
         <button type="submit" name="calculate">Calculate</button>
-    </form> -->
+    </form> 
 
     <?php
+    if(isset($_POST['num1'],$_POST['num2'],$_POST['operator'])){
 
-    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //     $num1 = $_POST['num1'];
-    //     $num2 = $_POST['num2'];
-    //     $operator = $_POST['operator'];
+        $num1=$_POST['num1'];
+        $num2=$_POST['num2'];
 
-    //     switch ($operator) {
-    //         case 'add':
-    //             $result = $num1 + $num2;
-    //             break;
-    //         case 'subtract':
-    //             $result = $num1 - $num2;
-    //             break;
-    //         case 'multiply':
-    //             $result = $num1 * $num2;
-    //             break;
-    //         case 'divide':
-    //             // Check if divisor is zero
-    //             if ($num2 != 0) {
-    //                 $result = $num1 / $num2;
-    //             } else {
-    //                 echo "Error: Division by zero";
-    //                 break;
-    //             }
-    //             break;
-    //         default:
-    //             echo "Invalid operator";
-    //             break;
-    //     }
-    //     echo "<h3>Result: $num1 $operator $num2 = $result</h3>";
-    // }
+    }
+
+
+
+
+
 
     ?>
-<!-- </body>
-</html> -->
+</body>
+</html>
+
 #Q_3
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task3</title>
+</head>
+<body>
+    <form method="post">
+        <input type="text" name="text" placeholder="Enter your task">
+        <button type="submit" name="add">add</button>
+    </form>
+    <?php
+    session_start();
+    if(!isset($_SESSION["text"])){
+        $_SESSION["text"]=[];
+    }
+    if(isset($_POST["add"])){
+        $add=$_POST["text"];
+        $_SESSION["text"][]=$add;
+    }
+    if(isset($_POST["delete"])){
+        $index=$_POST["delete"];
+        unset($_SESSION["text"][$index]);
+    }
+    if(!empty($_SESSION["text"])){
+        echo "<ul>";
+        foreach($_SESSION["text"] as $index=>$add){
+            echo "<li>$add
+                 <form method='post' style='display:inline;' >
+                 <button type='submit' name='delete' value='$index'>delete</button></form></li>";
+        }
+        echo "</ul>";
+    }else{
+        echo "No task";
+    }
+
+
+    ?>
+</body>
+</html>
+
 
 
 
@@ -169,4 +193,21 @@
 
 
 
-
+#q_8
+<?php
+setcookie('username', 'john_doe', time() + (86400 * 30), '/');
+setcookie('language', 'en_US', time() + (86400 * 30), '/');
+function printAllCookies() {
+    if (count($_COOKIE) > 0) {
+        echo "<h2>All Cookies:</h2>";
+        echo "<ul>";
+        foreach ($_COOKIE as $name => $value) {
+            echo "<li>$name = $value</li>";
+        }
+        echo "</ul>";
+    } else {
+        echo "<p>No cookies are set.</p>";
+    }
+}
+printAllCookies();
+?>
